@@ -5,8 +5,15 @@ Works locally (via FastAPI) or on Streamlit Community Cloud (inline backend).
 from __future__ import annotations
 
 import os
+import sys
+from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
+
+# Ensure repo root is on sys.path (Streamlit Cloud runs apps/web/app.py directly)
+_ROOT = Path(__file__).resolve().parents[2]
+if str(_ROOT) not in sys.path:
+    sys.path.insert(0, str(_ROOT))
 
 import httpx
 import plotly.express as px
