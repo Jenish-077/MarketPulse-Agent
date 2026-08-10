@@ -42,29 +42,85 @@ SECRET_KEYS = [
 ]
 
 
-def _apply_secrets() -> None:
-    """Copy Streamlit Cloud secrets into env for packages.settings."""
+def _apply_secrets() -> dict[str, str]:
+    """Copy Streamlit Cloud secrets into env for packages.settings. Returns applied map."""
+    applied: dict[str, str] = {}
     try:
-        secrets = st.secrets
+        secrets = dict(st.secrets)
     except Exception:
-        return
+        return applied
+
+    # Support flat keys and nested {"general": {"DATABASE_URL": ...}}
+    flat: dict[str, Any] = {}
+    for key, value in secrets.items():
+        if hasattr(value, "keys"):  # nested section
+            for k2, v2 in dict(value).items():
+                flat[str(k2)] = v2
+        else:
+            flat[str(key)] = value
+
     for key in SECRET_KEYS:
-        if key in secrets and secrets[key] not in (None, ""):
-            os.environ[key] = str(secrets[key])
+        if key in flat and flat[key] not in (None, ""):
+            os.environ[key] = str(flat[key]).strip().strip('"').strip("'")
+            applied[key] = "set"
+    # Always force inline on Streamlit Cloud
+    os.environ.setdefault("SIGNALWATCH_INLINE", "1")
+    return applied
 
 
 st.set_page_config(page_title="SignalWatch", page_icon="📡", layout="wide")
-_apply_secrets()
+_applied = _apply_secrets()
 
-from packages.settings import clear_settings_cache
+from packages.db.models import reset_engine
+from packages.settings import clear_settings_cache, get_settings
 
 clear_settings_cache()
+reset_engine()
+_settings = get_settings()
 
 # On Streamlit Cloud, run DB/agent in-process. Locally, try FastAPI then fall back.
 _INLINE = os.getenv("SIGNALWATCH_INLINE", "").lower() in {"1", "true", "yes"}
 _API = os.getenv("API_BASE_URL", "http://localhost:8000").rstrip("/")
-if os.getenv("STREAMLIT_SHARING_MODE") or os.getenv("STREAMLIT_RUNTIME_ENV") == "cloud":
+_ON_CLOUD = bool(
+    os.getenv("STREAMLIT_SHARING_MODE")
+    or os.getenv("STREAMLIT_RUNTIME_ENV") == "cloud"
+    or "streamlit.app" in os.getenv("HOSTNAME", "")
+)
+if _ON_CLOUD:
     _INLINE = True
+
+_db_ok = bool(
+    _settings.database_url
+    and _settings.database_url.startswith("postgresql")
+    and "localhost" not in _settings.database_url
+    and "127.0.0.1" not in _settings.database_url
+)
+
+if _ON_CLOUD and not _db_ok:
+    st.error("Supabase DATABASE_URL is missing or still points to localhost.")
+    st.markdown(
+        """
+### Fix in Streamlit Cloud
+1. Click **Manage app** (bottom right) → **Settings** → **Secrets**
+2. Paste this (replace with your real values):
+
+```toml
+SIGNALWATCH_INLINE = "1"
+
+DATABASE_URL = "postgresql+psycopg://postgres.YOUR_REF:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres"
+
+OPENAI_API_KEY = "your-key"
+OPENAI_BASE_URL = "https://api.deepseek.com"
+OPENAI_MODEL = "deepseek-chat"
+OPENAI_EMBEDDING_MODEL = "local-hash"
+
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/..."
+```
+
+3. Click **Save**, then **Reboot app**.
+        """
+    )
+    st.stop()
 
 
 def _inline_api(method: str, path: str, **kwargs: Any) -> Any:

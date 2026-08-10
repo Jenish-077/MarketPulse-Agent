@@ -190,11 +190,35 @@ _engine = None
 _SessionLocal = None
 
 
+def reset_engine() -> None:
+    """Drop cached engine so a new DATABASE_URL (e.g. Streamlit secrets) takes effect."""
+    global _engine, _SessionLocal
+    if _engine is not None:
+        try:
+            _engine.dispose()
+        except Exception:
+            pass
+    _engine = None
+    _SessionLocal = None
+
+
 def get_engine():
     global _engine, _SessionLocal
     if _engine is None:
+        from packages.settings import get_settings
+
         settings = get_settings()
-        _engine = create_engine(settings.database_url, pool_pre_ping=True)
+        url = settings.database_url
+        if "localhost" in url or "127.0.0.1" in url:
+            # Helpful for Streamlit Cloud misconfig
+            import os
+
+            if os.getenv("STREAMLIT_RUNTIME_ENV") == "cloud" or os.getenv("STREAMLIT_SHARING_MODE"):
+                raise RuntimeError(
+                    "DATABASE_URL points to localhost. On Streamlit Cloud, set Secrets → DATABASE_URL "
+                    "to your Supabase connection string (postgresql+psycopg://...)."
+                )
+        _engine = create_engine(url, pool_pre_ping=True)
         _SessionLocal = sessionmaker(bind=_engine, autoflush=False, autocommit=False)
     return _engine
 
