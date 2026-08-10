@@ -1,4 +1,6 @@
-# Streamlit Community Cloud / pip install -r requirements.txt
+# Streamlit Community Cloud installs this first so `packages` / `apps` import cleanly
+-e .
+
 fastapi>=0.115.0
 uvicorn[standard]>=0.32.0
 sqlalchemy>=2.0.36

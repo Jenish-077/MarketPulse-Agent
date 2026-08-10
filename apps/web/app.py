@@ -11,9 +11,28 @@ from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 # Ensure repo root is on sys.path (Streamlit Cloud runs apps/web/app.py directly)
-_ROOT = Path(__file__).resolve().parents[2]
-if str(_ROOT) not in sys.path:
-    sys.path.insert(0, str(_ROOT))
+def _bootstrap_path() -> str:
+    here = Path(__file__).resolve()
+    candidates = [
+        here.parents[2],  # <repo>/apps/web/app.py → <repo>
+        here.parents[1].parent if len(here.parents) > 1 else here.parent,
+        Path.cwd(),
+        Path("/mount/src/marketpulse-agent"),
+    ]
+    for root in candidates:
+        if (root / "packages" / "settings.py").exists():
+            root_s = str(root)
+            if root_s not in sys.path:
+                sys.path.insert(0, root_s)
+            return root_s
+    # last resort
+    fallback = str(here.parents[2])
+    if fallback not in sys.path:
+        sys.path.insert(0, fallback)
+    return fallback
+
+
+_REPO_ROOT = _bootstrap_path()
 
 import httpx
 import plotly.express as px

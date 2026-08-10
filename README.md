@@ -2,6 +2,8 @@
 
 > Built SignalWatch, an agentic CI system (LangGraph + Playwright + FastAPI + pgvector) that diffs competitor pages into structured events, scores signal vs noise with explainable feedback learning, and sends source-grounded alerts with company-context RAG.
 
+**Live demo:** [https://marketpulse-agent.streamlit.app](https://marketpulse-agent.streamlit.app)
+
 **SignalWatch** is a background competitive-intelligence agent — not a chatbot. It watches public competitor pages on a schedule, detects meaningful changes, scores importance against your company context, and sends sourced alerts with suggested actions. Human feedback (useful / meh / noise) updates scoring weights with small, capped, explainable deltas.
 
 ## Problem
