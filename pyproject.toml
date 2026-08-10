@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "signalwatch"
+version = "0.1.0"
+description = "Agentic competitive intelligence — monitor, score, alert, learn"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.32.0",
+  "sqlalchemy>=2.0.36",
+  "psycopg[binary]>=3.2.3",
+  "pgvector>=0.3.6",
+  "alembic>=1.14.0",
+  "pydantic>=2.10.0",
+  "pydantic-settings>=2.6.0",
+  "httpx>=0.28.0",
+  "beautifulsoup4>=4.12.3",
+  "lxml>=5.3.0",
+  "playwright>=1.49.0",
+  "langgraph>=0.2.60",
+  "langchain-core>=0.3.28",
+  "langchain-openai>=0.2.14",
+  "openai>=1.58.0",
+  "apscheduler>=3.10.4",
+  "streamlit>=1.41.0",
+  "plotly>=5.24.0",
+  "python-dotenv>=1.0.1",
+  "tenacity>=9.0.0",
+  "numpy>=2.1.0",
+  "tiktoken>=0.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.0",
+  "pytest-asyncio>=0.24.0",
+  "ruff>=0.8.0",
+]
+
+[project.scripts]
+signalwatch-demo = "scripts.seed_demo:main"
+signalwatch-eval = "evals.run_eval:main"
+signalwatch-worker = "apps.worker.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["apps*", "packages*", "evals*", "scripts*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["evals", "tests"]

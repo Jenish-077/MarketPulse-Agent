@@ -1,0 +1,325 @@
+[
+  {
+    "id": "eval_price_cut_pro",
+    "competitor": "EvalCo",
+    "page_label": "pricing",
+    "before": "fixture://eval_price_cut_pro/before",
+    "after": "fixture://eval_price_cut_pro/after",
+    "should_alert": true,
+    "event_type": "pricing_change",
+    "key_entities": {
+      "plan": "Pro",
+      "old_price": "99",
+      "new_price": "79"
+    }
+  },
+  {
+    "id": "eval_price_hike_starter",
+    "competitor": "EvalCo",
+    "page_label": "pricing",
+    "before": "fixture://eval_price_hike_starter/before",
+    "after": "fixture://eval_price_hike_starter/after",
+    "should_alert": true,
+    "event_type": "pricing_change",
+    "key_entities": {
+      "plan": "Starter",
+      "old_price": "19",
+      "new_price": "29"
+    }
+  },
+  {
+    "id": "eval_enterprise_contact_only",
+    "competitor": "EvalCo",
+    "page_label": "pricing",
+    "before": "fixture://eval_enterprise_contact_only/before",
+    "after": "fixture://eval_enterprise_contact_only/after",
+    "should_alert": false,
+    "event_type": "other",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_new_plan_added",
+    "competitor": "EvalCo",
+    "page_label": "pricing",
+    "before": "fixture://eval_new_plan_added/before",
+    "after": "fixture://eval_new_plan_added/after",
+    "should_alert": true,
+    "event_type": "plan_change",
+    "key_entities": {
+      "plan": "Business",
+      "new_price": "99",
+      "target_segment": "mid-market"
+    }
+  },
+  {
+    "id": "eval_ai_copilot_launch",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_ai_copilot_launch/before",
+    "after": "fixture://eval_ai_copilot_launch/after",
+    "should_alert": true,
+    "event_type": "feature_launch",
+    "key_entities": {
+      "feature_area": "AI Copilot"
+    }
+  },
+  {
+    "id": "eval_sso_launch",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_sso_launch/before",
+    "after": "fixture://eval_sso_launch/after",
+    "should_alert": true,
+    "event_type": "feature_launch",
+    "key_entities": {
+      "feature_area": "SSO"
+    }
+  },
+  {
+    "id": "eval_feature_removal",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_feature_removal/before",
+    "after": "fixture://eval_feature_removal/after",
+    "should_alert": true,
+    "event_type": "feature_removal",
+    "key_entities": {
+      "feature_area": "PDF reports"
+    }
+  },
+  {
+    "id": "eval_changelog_minor",
+    "competitor": "EvalCo",
+    "page_label": "changelog",
+    "before": "fixture://eval_changelog_minor/before",
+    "after": "fixture://eval_changelog_minor/after",
+    "should_alert": false,
+    "event_type": "changelog_entry",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_changelog_major_ai",
+    "competitor": "EvalCo",
+    "page_label": "changelog",
+    "before": "fixture://eval_changelog_major_ai/before",
+    "after": "fixture://eval_changelog_major_ai/after",
+    "should_alert": true,
+    "event_type": "feature_launch",
+    "key_entities": {
+      "feature_area": "LLM insight summaries"
+    }
+  },
+  {
+    "id": "eval_blog_pricing_experiment",
+    "competitor": "EvalCo",
+    "page_label": "blog",
+    "before": "fixture://eval_blog_pricing_experiment/before",
+    "after": "fixture://eval_blog_pricing_experiment/after",
+    "should_alert": true,
+    "event_type": "blog_announcement",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_blog_culture",
+    "competitor": "EvalCo",
+    "page_label": "blog",
+    "before": "fixture://eval_blog_culture/before",
+    "after": "fixture://eval_blog_culture/after",
+    "should_alert": false,
+    "event_type": "blog_announcement",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_noise_cookie",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_noise_cookie/before",
+    "after": "fixture://eval_noise_cookie/after",
+    "should_alert": false,
+    "event_type": "noise",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_noise_footer_year",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_noise_footer_year/before",
+    "after": "fixture://eval_noise_footer_year/after",
+    "should_alert": false,
+    "event_type": "noise",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_noise_last_updated",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_noise_last_updated/before",
+    "after": "fixture://eval_noise_last_updated/after",
+    "should_alert": false,
+    "event_type": "noise",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_noise_careers",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_noise_careers/before",
+    "after": "fixture://eval_noise_careers/after",
+    "should_alert": false,
+    "event_type": "noise",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_noise_privacy",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_noise_privacy/before",
+    "after": "fixture://eval_noise_privacy/after",
+    "should_alert": false,
+    "event_type": "noise",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_positioning_midmarket",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_positioning_midmarket/before",
+    "after": "fixture://eval_positioning_midmarket/after",
+    "should_alert": true,
+    "event_type": "positioning_change",
+    "key_entities": {
+      "target_segment": "mid-market"
+    }
+  },
+  {
+    "id": "eval_analytics_automation",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_analytics_automation/before",
+    "after": "fixture://eval_analytics_automation/after",
+    "should_alert": true,
+    "event_type": "feature_launch",
+    "key_entities": {
+      "feature_area": "Analytics automation"
+    }
+  },
+  {
+    "id": "eval_free_tier_added",
+    "competitor": "EvalCo",
+    "page_label": "pricing",
+    "before": "fixture://eval_free_tier_added/before",
+    "after": "fixture://eval_free_tier_added/after",
+    "should_alert": true,
+    "event_type": "plan_change",
+    "key_entities": {
+      "plan": "Free",
+      "new_price": "0"
+    }
+  },
+  {
+    "id": "eval_tiny_whitespace",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_tiny_whitespace/before",
+    "after": "fixture://eval_tiny_whitespace/after",
+    "should_alert": false,
+    "event_type": "noise",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_newsletter_cta",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_newsletter_cta/before",
+    "after": "fixture://eval_newsletter_cta/after",
+    "should_alert": false,
+    "event_type": "noise",
+    "key_entities": {}
+  },
+  {
+    "id": "eval_target_segment_enterprise",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_target_segment_enterprise/before",
+    "after": "fixture://eval_target_segment_enterprise/after",
+    "should_alert": true,
+    "event_type": "positioning_change",
+    "key_entities": {
+      "target_segment": "enterprise"
+    }
+  },
+  {
+    "id": "eval_price_and_feature",
+    "competitor": "EvalCo",
+    "page_label": "pricing",
+    "before": "fixture://eval_price_and_feature/before",
+    "after": "fixture://eval_price_and_feature/after",
+    "should_alert": true,
+    "event_type": "pricing_change",
+    "key_entities": {
+      "plan": "Pro",
+      "old_price": "70",
+      "new_price": "55"
+    }
+  },
+  {
+    "id": "eval_empty_to_content",
+    "competitor": "EvalCo",
+    "page_label": "product",
+    "before": "fixture://eval_empty_to_content/before",
+    "after": "fixture://eval_empty_to_content/after",
+    "should_alert": true,
+    "event_type": "feature_launch",
+    "key_entities": {
+      "feature_area": "collaborative notebooks"
+    }
+  },
+  {
+    "id": "acme_pricing",
+    "competitor": "Demo",
+    "page_label": "pricing",
+    "before": "fixture://acme_pricing/before",
+    "after": "fixture://acme_pricing/after",
+    "should_alert": true,
+    "event_type": "pricing_change",
+    "key_entities": {
+      "plan": "Pro",
+      "old_price": "79",
+      "new_price": "59"
+    }
+  },
+  {
+    "id": "acme_changelog",
+    "competitor": "Demo",
+    "page_label": "changelog",
+    "before": "fixture://acme_changelog/before",
+    "after": "fixture://acme_changelog/after",
+    "should_alert": true,
+    "event_type": "feature_launch",
+    "key_entities": {
+      "feature_area": "AI Copilot"
+    }
+  },
+  {
+    "id": "northstar_product",
+    "competitor": "Demo",
+    "page_label": "product",
+    "before": "fixture://northstar_product/before",
+    "after": "fixture://northstar_product/after",
+    "should_alert": true,
+    "event_type": "feature_launch",
+    "key_entities": {
+      "feature_area": "LLM-powered insight summaries"
+    }
+  },
+  {
+    "id": "northstar_blog",
+    "competitor": "Demo",
+    "page_label": "blog",
+    "before": "fixture://northstar_blog/before",
+    "after": "fixture://northstar_blog/after",
+    "should_alert": true,
+    "event_type": "blog_announcement",
+    "key_entities": {}
+  }
+]
